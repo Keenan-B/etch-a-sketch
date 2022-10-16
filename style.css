@@ -1,0 +1,19 @@
+#container {
+    background: black;
+    display: inline-block;
+    border: 5px solid black;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(16, 40px);
+    grid-template-rows: repeat(16, 40px);
+    grid-gap: 1px;
+}
+
+.cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: white;
+}
