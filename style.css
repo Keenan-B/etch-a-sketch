@@ -6,14 +6,25 @@
 
 .grid {
     display: grid;
-    grid-template-columns: repeat(16, 40px);
-    grid-template-rows: repeat(16, 40px);
-    grid-gap: 1px;
+    grid-template-columns: repeat(16, 1fr);
+    grid-template-rows: repeat(16, 1fr);
+    gap: 0px;
+    width: 960px;
+    height: 960px;
 }
 
 .cell {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: white;
+    background-color: white;
+}
+
+.filledCell {
+    background-color: black;
+}
+
+.button {
+    display: flex;
+    justify-content: center;
 }
