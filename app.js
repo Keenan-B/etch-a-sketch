@@ -1,8 +1,8 @@
 const container = document.querySelector("#container");
-let userInput = document.getElementById("button1")
+let userInput = document.getElementById("button1");
 
-
-
+const filledCell = document.createElement("div");
+filledCell.classList.add("filledCell");
 
 const grid = document.createElement("div");
 grid.classList.add("grid")
@@ -13,15 +13,53 @@ cell.classList.add("cell");
 
 const btn1 = document.createElement("button");
 btn1.classList.add("button");
-btn1.textContent = "Change grid size"
+btn1.textContent = "Change grid size";
 button1.appendChild(btn1);
+btn1.addEventListener("click", updateGrid);
 
-btn1.addEventListener("click", updateGrid)
+const btn2 = document.createElement("button");
+btn2.classList.add("button")
+btn2.textContent = "Choose Color"
+button2.appendChild(btn2);
+//btn2.addEventListener("click", chooseColor)
+
+const btn3 = document.createElement("button");
+btn3.classList.add("button");
+btn3.textContent= "Reset";
+button3.appendChild(btn3);
+btn3.addEventListener("click", reset);
+
+
+function reset(){
+    grid.innerHTML = ""
+    let userInput = 16
+    grid.style.setProperty(
+        "grid-template-columns",
+        `repeat(${userInput}, 1fr)`
+    );
+    grid.style.setProperty(
+        "grid-template-rows",
+        `repeat(${userInput}, 1fr)`
+    );
+    
+    for (let i= 0; i < (userInput * userInput); i++){
+        const cell = document.createElement("div");
+        cell.classList.add("cell");
+        grid.appendChild(cell).className = "cell";
+    }
+    makeGrid(userInput)
+    console.log(userInput);
+    const cells = document.querySelectorAll(".cell");
+    cells.forEach(cell => cell.addEventListener("mouseover", () => {
+        cell.classList.add("filledCell")
+}));
+}
 
 function updateGrid(){
     grid.innerHTML = ""
     let userInput = prompt("How many squares per side? (1-100)")
-    if (userInput < 1 || userInput > 100 || NaN ){
+    if (userInput < 1 || userInput > 100 ){
+        reset()
         return alert("Error: Must be a number between 1 and 100.")
     }
     
@@ -43,32 +81,21 @@ function updateGrid(){
     console.log(userInput);
     const cells = document.querySelectorAll(".cell");
     cells.forEach(cell => cell.addEventListener("mouseover", () => {
-        cell.classList.replace("cell", "filledCell")
+        cell.classList.add("filledCell")
 }));
 }
-
-userInput.addEventListener("change", updateGrid)
 
 function makeGrid(gridUnits){
     for (let i= 0; i < (gridUnits * gridUnits); i++){
         const cell = document.createElement("div");
         grid.appendChild(cell).className = "cell";
     }
+    const cells = document.querySelectorAll(".cell");
+    cells.forEach(cell => cell.addEventListener("mouseover", () => {
+     cell.classList.add("filledCell")
+}));
 }
 makeGrid(16)
 
-const cells = document.querySelectorAll(".cell");
-cells.forEach(cell => cell.addEventListener("mouseover", () => {
-    cell.classList.replace("cell", "filledCell")
-}));
 
 
-
-//cells.forEach(cell => cell.addEventListener("mouseover", colorCell));
-
-//addEventListener("mouseover", colorCell);
-
-//function colorCell(){
-//    cell.style.backgroundColor = "blue";
-
-//}
