@@ -1,10 +1,4 @@
 const container = document.querySelector("#container");
-//let userInput = document.getElementById("button1");
-
-//const red = document.querySelector("#rangeRed");
-
-const filledCell = document.createElement("div");
-filledCell.classList.add("filledCell");
 
 const grid = document.createElement("div");
 grid.classList.add("grid")
@@ -13,9 +7,12 @@ container.appendChild(grid);
 const cell = document.createElement("div");
 cell.classList.add("cell");
 
+const userInput = document.getElementById("userInput");
+
+
 const btn1 = document.createElement("button");
 btn1.classList.add("button");
-btn1.textContent = "Change grid size";
+btn1.textContent = "Reset";
 button1.appendChild(btn1);
 btn1.addEventListener("click", updateGrid);
 
@@ -27,64 +24,40 @@ btn2.addEventListener("click", randomColor)
 
 const btn3 = document.createElement("button");
 btn3.classList.add("button");
-btn3.textContent= "Reset";
+btn3.textContent= "Black";
 button3.appendChild(btn3);
-btn3.addEventListener("click", reset);
+btn3.addEventListener("click", black);
 
 
-function reset(){
-    grid.innerHTML = ""
-    let userInput = 16
-    grid.style.setProperty(
-        "grid-template-columns",
-        `repeat(${userInput}, 1fr)`
-    );
-    grid.style.setProperty(
-        "grid-template-rows",
-        `repeat(${userInput}, 1fr)`
-    );
-    
-    for (let i= 0; i < (userInput * userInput); i++){
-        const cell = document.createElement("div");
-        cell.classList.add("cell");
-        grid.appendChild(cell).className = "cell";
-    }
-    makeGrid(userInput)
-    console.log(userInput);
+function black(){
     const cells = document.querySelectorAll(".cell");
     cells.forEach(cell => cell.addEventListener("mouseover", () => {
-        cell.classList.add("filledCell")
+        cell.style.backgroundColor = "black";
 }));
 }
 
 function updateGrid(){
-    grid.innerHTML = ""
-    let userInput = prompt("How many squares per side? (1-100)")
-    if (userInput < 1 || userInput > 100 ){
-        reset()
-        return alert("Error: Must be a number between 1 and 100.")
-    }
-    
+    grid.innerHTML = "";
+    document.getElementById("rangeRed").value = 0;
+    document.getElementById("rangeGreen").value = 0;
+    document.getElementById("rangeBlue").value = 0;
+    document.getElementById("colorOutput").textContent= "";
     grid.style.setProperty(
         "grid-template-columns",
-        `repeat(${userInput}, 1fr)`
+        `repeat(${userInput.value}, 1fr)`
     );
     grid.style.setProperty(
         "grid-template-rows",
-        `repeat(${userInput}, 1fr)`
+        `repeat(${userInput.value}, 1fr)`
     );
     
-    for (let i= 0; i < (userInput * userInput); i++){
+    for (let i= 0; i < (userInput.value * userInput.value); i++){
         const cell = document.createElement("div");
         cell.classList.add("cell");
         grid.appendChild(cell).className = "cell";
     }
-    makeGrid(userInput)
-    console.log(userInput);
-    const cells = document.querySelectorAll(".cell");
-    cells.forEach(cell => cell.addEventListener("mouseover", () => {
-        cell.classList.add("filledCell")
-}));
+    makeGrid(userInput.value)
+    console.log(userInput.value);
 }
 
 function makeGrid(gridUnits){
@@ -92,10 +65,6 @@ function makeGrid(gridUnits){
         const cell = document.createElement("div");
         grid.appendChild(cell).className = "cell";
     }
-    const cells = document.querySelectorAll(".cell");
-    cells.forEach(cell => cell.addEventListener("mouseover", () => {
-     cell.style.backgroundColor = "black"
-}));
 }
 makeGrid(16)
 
@@ -126,12 +95,18 @@ function changeColor(){
     cells.forEach(cell => cell.addEventListener("mouseover", () => {
      cell.style.backgroundColor = color
 }));
+}
 
+function gridSizeNum(){
+    document.getElementById("gridSize").textContent = ": " + userInput.value;
 }
 
 document.getElementById("rangeRed").addEventListener("input", changeColor)
 document.getElementById("rangeGreen").addEventListener("input", changeColor)
 document.getElementById("rangeBlue").addEventListener("input", changeColor)
+document.getElementById("userInput").addEventListener("input", gridSizeNum)
+document.getElementById("gridSize").textContent = ": " + userInput.value;
+
 
 
 

@@ -61,12 +61,12 @@
     padding: 10px;
     max-width: 960px;
     min-width: 960px;
-    
-   
+
 }
 
 .leftbuttons {
     display: flex;
+    align-items: center;
     margin-left: 10px;
 }
 
