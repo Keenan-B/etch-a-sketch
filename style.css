@@ -1,5 +1,4 @@
 * {
-    font-family:cursive;
     text-align: center;
     background-color:darkred;
 }
@@ -8,6 +7,7 @@
     display: flex;
     justify-content: center;
     font-style: italic;
+    font-family: cursive;
     color: goldenrod;
 }
 
@@ -40,9 +40,6 @@
     background-color: white;
 }
 
-.filledCell {
-    background-color: black;
-}
 
 .button {
     display: flex;
@@ -59,7 +56,42 @@
 
 .buttons {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
+    align-items: center;
     padding: 10px;
     max-width: 960px;
+    min-width: 960px;
+    
+   
+}
+
+.leftbuttons {
+    display: flex;
+    margin-left: 10px;
+}
+
+.rgbSlider {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 700;
+    border: 5px solid;
+    border-radius: 4px;
+    box-shadow: 2px;
+}
+
+.labelRed {
+    display: flex;
+    flex-direction: column;
+}
+
+.labelGreen {
+    display: flex;
+    flex-direction: column;
+}
+
+.labelBlue {
+    display: flex;
+    flex-direction: column;
 }

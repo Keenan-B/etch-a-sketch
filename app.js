@@ -1,5 +1,7 @@
 const container = document.querySelector("#container");
-let userInput = document.getElementById("button1");
+//let userInput = document.getElementById("button1");
+
+//const red = document.querySelector("#rangeRed");
 
 const filledCell = document.createElement("div");
 filledCell.classList.add("filledCell");
@@ -19,9 +21,9 @@ btn1.addEventListener("click", updateGrid);
 
 const btn2 = document.createElement("button");
 btn2.classList.add("button")
-btn2.textContent = "Choose Color"
+btn2.textContent = "Random Color"
 button2.appendChild(btn2);
-//btn2.addEventListener("click", chooseColor)
+btn2.addEventListener("click", randomColor)
 
 const btn3 = document.createElement("button");
 btn3.classList.add("button");
@@ -92,10 +94,45 @@ function makeGrid(gridUnits){
     }
     const cells = document.querySelectorAll(".cell");
     cells.forEach(cell => cell.addEventListener("mouseover", () => {
-     cell.classList.add("filledCell")
+     cell.style.backgroundColor = "black"
 }));
 }
 makeGrid(16)
+
+
+function getRandomColor(){
+    let letters = '0123456789ABCDEF';
+    let color = '#';
+    for (var i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+      }
+      return color;
+}
+
+function randomColor() {
+    const cells = document.querySelectorAll(".cell");
+    cells.forEach(cell => cell.addEventListener("mouseover", () => {
+     cell.style.backgroundColor = getRandomColor()
+}));
+}
+
+function changeColor(){
+    let red = document.getElementById("rangeRed").value;
+    let green = document.getElementById("rangeGreen").value;
+    let blue = document.getElementById("rangeBlue").value;
+    let color = "rgb(" + red + "," + green + "," + blue + ")";
+    document.getElementById("colorOutput").textContent= ": " + color;
+    const cells = document.querySelectorAll(".cell");
+    cells.forEach(cell => cell.addEventListener("mouseover", () => {
+     cell.style.backgroundColor = color
+}));
+
+}
+
+document.getElementById("rangeRed").addEventListener("input", changeColor)
+document.getElementById("rangeGreen").addEventListener("input", changeColor)
+document.getElementById("rangeBlue").addEventListener("input", changeColor)
+
 
 
 
